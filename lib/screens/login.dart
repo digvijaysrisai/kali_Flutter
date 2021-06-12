@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
-import 'package:kali/screens/login.dart';
+import 'package:kali/screens/register.dart';
 
-class Register extends StatefulWidget {
+class Login extends StatefulWidget {
 
-  static String id = 'register';
+  static String id = 'login';
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<Login> createState() => _LoginState();
 }
 
 final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
@@ -18,7 +17,7 @@ RegExp regExp = new RegExp(p);
 
 bool obserText = true;
 
-class _RegisterState extends State<Register> {
+class _LoginState extends State<Login> {
 
 
   void validation() {
@@ -32,29 +31,8 @@ class _RegisterState extends State<Register> {
   }
 
 
-  final userNameValidator = MultiValidator([
-    RequiredValidator(errorText: 'Please Enter Username'),
-    MinLengthValidator(7, errorText: 'UserName should be atleast of length 7'),
-  ]);
-
-  final passwordValidator = MultiValidator([
-    RequiredValidator(errorText: 'password is required'),
-    MinLengthValidator(8, errorText: 'password must be at least 8 digits long'),
-    PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'passwords must have at least one special character')
-  ]);
-
-  final phoneNumberValidator = MultiValidator([
-    RequiredValidator(errorText: 'Please Fill Phone Number'),
-    MinLengthValidator(10, errorText: 'Phone Number should be atleast of length 10'),
-    MaxLengthValidator(12, errorText: 'Phone Number should be atmost of length 12'),
-  ]);
-
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   child: Text('hello',textDirection: TextDirection.ltr,),
-    // );
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -66,7 +44,7 @@ class _RegisterState extends State<Register> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Register',
+                    'Login',
                     style: TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
@@ -82,30 +60,6 @@ class _RegisterState extends State<Register> {
                         TextFormField(
                           validator: (value) {
                             if(value == '') {
-                              return 'Please enter UserName';
-                            }
-                            else if(value!.length < 7) {
-                              return 'UserName should be greater than 7 characters';
-                            }
-                            return '';
-                          },
-                          // validator: userNameValidator,
-                          decoration: InputDecoration(
-                            icon: Icon(Icons.person),
-                            hintText: 'Username',
-                            hintStyle: TextStyle(
-                              color: Colors.black38,
-                            ),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        TextFormField(
-                          // validator: EmailValidator(errorText: 'Enter a valid Email ID'),
-                          validator: (value) {
-                            if(value == '') {
                               return 'Enter your Email Id';
                             }
                             else if(!regExp.hasMatch(value!)) {
@@ -113,6 +67,7 @@ class _RegisterState extends State<Register> {
                             }
                             return '';
                           },
+                          // validator: EmailValidator(errorText: 'Enter a valid Email ID'),
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             icon: Icon(Icons.email),
@@ -127,7 +82,7 @@ class _RegisterState extends State<Register> {
                           height: 5,
                         ),
                         TextFormField(
-                          // validator: passwordValidator,
+                          obscureText: obserText,
                           validator: (value) {
                             if(value == ''){
                               return 'Enter your Password';
@@ -137,7 +92,7 @@ class _RegisterState extends State<Register> {
                             }
                             return '';
                           },
-                          obscureText: obserText,
+                          // validator: passwordValidator,
                           decoration: InputDecoration(
                             icon: Icon(Icons.password),
                             hintText: 'Password',
@@ -158,39 +113,13 @@ class _RegisterState extends State<Register> {
                           ),
                         ),
                         SizedBox(
-                          height: 5,
-                        ),
-                        TextFormField(
-                          // validator: phoneNumberValidator,
-                          validator: (value) {
-                            if(value == '') {
-                              return 'Fill your Phone Number';
-                            }
-                            else if (value!.length < 10) {
-                              return 'Phone Number should be atleast of 10 digits';
-                            }
-                            else if (value.length > 12) {
-                              return 'Phone Number should be atmost of 12 digits';
-                            }
-                          },
-                          keyboardType: TextInputType.phone,
-                          decoration: InputDecoration(
-                            icon: Icon(Icons.phone),
-                            hintText: 'Phone Number',
-                            hintStyle: TextStyle(
-                              color: Colors.black38,
-                            ),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                        SizedBox(
                           height: 10,
                         ),
                         Container(
                           width: 125,
                           child: RaisedButton(
                             color: Colors.grey,
-                            child: Text('Register'),
+                            child: Text('Login'),
                             onPressed: () {
                               validation();
                             },
@@ -202,13 +131,13 @@ class _RegisterState extends State<Register> {
                         Container(
                           child: Row(
                             children: <Widget>[
-                              Text('Have an account?  '),
+                              Text("Don't have an account?  "),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.pushNamed(context, Login.id);
+                                  Navigator.pop(context);
                                 },
                                 child: Text(
-                                  'Login',
+                                  'Register',
                                   style: TextStyle(
                                     color: Colors.blue,
                                     fontWeight: FontWeight.bold,
