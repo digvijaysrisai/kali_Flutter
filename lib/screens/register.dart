@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:kali/screens/login.dart';
+import 'package:kali/widgets/button_1.dart';
 
 class Register extends StatefulWidget {
 
@@ -186,6 +187,7 @@ class _RegisterState extends State<Register> {
                         SizedBox(
                           height: 10,
                         ),
+                        Button1(name: 'Register', onPressed: (){validation();}),
                         Container(
                           width: 125,
                           child: RaisedButton(

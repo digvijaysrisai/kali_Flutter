@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/screens/register.dart';
+import 'package:kali/widgets/button_1.dart';
 
 class Login extends StatefulWidget {
 
@@ -115,16 +116,7 @@ class _LoginState extends State<Login> {
                         SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          width: 125,
-                          child: RaisedButton(
-                            color: Colors.grey,
-                            child: Text('Login'),
-                            onPressed: () {
-                              validation();
-                            },
-                          ),
-                        ),
+                        Button1(name: 'Login', onPressed: (){validation();}),
                         SizedBox(
                           height: 15,
                         ),
